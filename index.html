@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>당근 만남 인증 (제안 화면)</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap">
+<style>
+:root{--o:#ff7e36;--ob:#fff1e8;--ink:#1f2328;--sub:#78808a;--gr:#f2f3f6;--ln:#e5e8eb;--bl:#5eaaff;--gn:#50be8c}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+body{background:#e9ebee;font-family:"Noto Sans KR",system-ui,sans-serif;color:var(--ink);display:flex;justify-content:center;word-break:keep-all}
+.app{width:100%;max-width:430px;min-height:100%;background:#fff;display:flex;flex-direction:column;padding-bottom:env(safe-area-inset-bottom,0)}
+header{display:flex;align-items:center;justify-content:center;position:relative;padding:calc(14px + env(safe-area-inset-top,0px)) 16px 14px;border-bottom:1px solid var(--ln);font-weight:700;font-size:18px}
+header .back{position:absolute;left:16px;font-size:26px;font-weight:400}
+.item{display:flex;gap:14px;align-items:center;margin:16px;padding:14px;background:var(--gr);border-radius:18px}
+.thumb{width:76px;height:76px;border-radius:14px;background:#ffd5b8;color:var(--o);display:flex;align-items:center;justify-content:center;font-weight:700;flex:none}
+.item b{display:block;font-size:17px}.item span{display:block;font-size:14px;color:var(--sub);margin-top:2px}
+.item em{display:block;font-style:normal;font-size:14px;font-weight:700;color:var(--o);margin-top:4px}
+.radar{position:relative;container-type:inline-size;width:calc(100% - 32px);margin:8px 16px 0;aspect-ratio:1}
+.ring{position:absolute;left:50%;top:50%;border:1.5px solid var(--ln);border-radius:50%;transform:translate(-50%,-50%)}
+.n{position:absolute;transform:translate(-50%,-50%);text-align:center;white-space:nowrap}
+.av{width:17cqw;height:17cqw;border-radius:50%;color:#fff;font-weight:700;font-size:5.6cqw;display:flex;align-items:center;justify-content:center;margin:0 auto}
+.av.sm{width:15.5cqw;height:15.5cqw;font-size:5.4cqw}
+.av.me{background:var(--o)}.av.pt{background:var(--bl);box-shadow:0 0 0 1.2cqw #fff,0 0 0 1.8cqw var(--o)}.av.nb{background:var(--gn)}
+.av.p{border-radius:5cqw;background:var(--o);font-size:10cqw;width:17cqw;height:17cqw}
+.pill{display:inline-block;background:#fff;border:1.5px solid var(--ln);border-radius:999px;padding:1.2cqw 3.2cqw;font-size:4.2cqw;font-weight:700}
+.pill.o{background:var(--ob);color:var(--o)}
+.pill.top{font-size:5cqw;padding:2cqw 5cqw}
+.nb-btn{cursor:pointer;border:0;background:none;font:inherit;color:inherit}
+.nb-btn:active .av{transform:scale(.94)}
+.cap{text-align:center;color:var(--sub);font-size:14px;margin:4px 16px 14px}
+.reward{margin:0 16px;padding:16px;background:var(--ob);border-radius:18px}
+.reward b{font-size:15px}.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.chips span{background:#fff;color:var(--o);font-weight:700;font-size:14px;padding:7px 14px;border-radius:999px}
+.badge{margin:22px 16px 0}
+.badge .row{display:flex;justify-content:space-between;font-weight:700;font-size:17px}.badge .row i{font-style:normal;color:var(--o)}
+.bar{height:11px;border-radius:6px;background:var(--gr);margin-top:10px;overflow:hidden}.bar div{height:100%;width:20%;background:var(--o);border-radius:6px;transition:width .6s}
+.badge p{font-size:14px;color:var(--sub);margin-top:8px}
+.done{display:none;margin:16px 16px 0;padding:14px 16px;border-radius:16px;background:#e8f7ef;color:#1d7a50;font-weight:700;font-size:15px}
+.cta{margin:auto 16px 0;padding-top:20px}
+button.go{width:100%;border:0;background:var(--o);color:#fff;font:700 21px "Noto Sans KR",system-ui,sans-serif;padding:20px;border-radius:22px;cursor:pointer;transition:background .2s,transform .1s}
+button.go:active{transform:scale(.98)}
+button.go.on{background:#9aa1a9}.go.ok{background:var(--gn)}
+.note{text-align:center;color:var(--sub);font-size:12px;padding:10px 0 16px}
+</style>
+</head>
+<body>
+<div class="app">
+  <header><span class="back">‹</span>만남 인증</header>
+
+  <div class="item">
+    <div class="thumb">물건</div>
+    <div><b>무선 이어폰 (거의 새것)</b><span>25,000원 · 직거래</span><em>약속 오늘 오후 1:00</em></div>
+  </div>
+
+  <div class="radar" id="radar">
+    <div class="ring" style="width:100%;height:100%"></div>
+    <div class="ring" style="width:71%;height:71%"></div>
+    <div class="ring" style="width:43%;height:43%"></div>
+
+    <div class="n" style="left:50%;top:8%"><span class="pill top">지금 근처에 3명이 당근을 켰어요</span></div>
+
+    <div class="n" style="left:50%;top:54%"><div class="av me">나</div></div>
+
+    <div class="n" style="left:68.6%;top:41%"><div class="av pt">상대</div></div>
+    <div class="n" style="left:68.6%;top:26%"><span class="pill o">약속 상대 · 12m</span></div>
+
+    <button class="n nb-btn" style="left:84%;top:77%" data-item="라면 5봉지"><div class="av sm nb">이웃</div><span class="pill" style="margin-top:1.5cqw">라면 5봉지 · 3,000원</span></button>
+    <button class="n nb-btn" style="left:21%;top:77%" data-item="자전거 헬멧"><div class="av sm nb">이웃</div><span class="pill" style="margin-top:1.5cqw">자전거 헬멧 · 8,000원</span></button>
+
+    <button class="n nb-btn" style="left:17%;top:31%" data-point="1"><div class="av p">P</div><span class="pill o" style="margin-top:1.5cqw">후기 쓰면 +200원</span></button>
+  </div>
+  <p class="cap">지금 근처에서 바로 거래할 수 있는 물건 2개</p>
+
+  <div class="reward">
+    <b>인증하면 받는 보상</b>
+    <div class="chips"><span>+ 당근포인트</span><span>매너온도 보너스</span><span>만남 배지</span></div>
+  </div>
+
+  <div class="badge">
+    <div class="row">만남 배지 <i id="cnt">1 / 5</i></div>
+    <div class="bar"><div id="fill"></div></div>
+    <p>인증을 5번 하면 배지가 켜져요</p>
+  </div>
+
+  <div class="done" id="done"></div>
+
+  <div class="cta">
+    <button class="go" id="go">만남 인증하기</button>
+    <p class="note">AI로 만든 예시 화면 (제안 화면)</p>
+  </div>
+</div>
+
+<script>
+var go=document.getElementById('go'),done=document.getElementById('done'),cnt=document.getElementById('cnt'),fill=document.getElementById('fill'),state=0;
+function show(msg){done.style.display='block';done.textContent=msg;}
+go.addEventListener('click',function(){
+  if(state!==0)return;
+  state=1;go.textContent='상대의 인증을 기다리는 중…';go.classList.add('on');
+  setTimeout(function(){
+    state=2;go.textContent='인증 완료';go.classList.remove('on');go.classList.add('ok');
+    cnt.textContent='2 / 5';fill.style.width='40%';
+    show('두 분 모두 인증했어요. 당근포인트와 매너온도 보너스를 받았어요.');
+  },1600);
+});
+document.querySelectorAll('.nb-btn').forEach(function(b){
+  b.addEventListener('click',function(){
+    if(b.dataset.item)show('‘'+b.dataset.item+'’ 이웃의 채팅으로 이동합니다. (예시)');
+    else show('근처 가게 후기를 쓰면 포인트를 받는 화면으로 이동합니다. (예시)');
+  });
+});
+</script>
+</body>
+</html>
